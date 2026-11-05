@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RemedyTrack - Login</title>
+    <style>
+        body {
+            background: #111;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 80px 20px;
+        }
+
+        .container {
+            max-width: 350px;
+            margin: auto;
+            border: 1px solid white;
+            border-radius: 20px;
+            padding: 30px;
+        }
+
+        h1, h2 {
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            background: #111;
+            color: white;
+            border: 1px solid #888;
+            border-radius: 5px;
+        }
+
+        button {
+            background: #222;
+            color: white;
+            border: 1px solid #888;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>RemedyTrack</h1>
+        <h2>Login</h2>
+
+        {% if form.errors %}
+        <p>Invalid username or password.</p>
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <input type="hidden" name="next" value="{{ next }}">
+            <button type="submit">Sign In</button>
+        </form>
+    </div>
+</body>
+</html>
+

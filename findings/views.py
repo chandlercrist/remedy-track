@@ -11,7 +11,7 @@ from .forms import FindingForm, FindingStatusForm
 
 
 
-@login_required(login_url="/admin/login/")
+@login_required
 def dashboard(request):
     context = {
         "open_count": Finding.objects.filter(status="Open").count(),
@@ -23,7 +23,7 @@ def dashboard(request):
     return render(request, "findings/dashboard.html", context)
 
 
-@login_required(login_url="/admin/login/")
+@login_required
 def finding_list(request):
     findings = Finding.objects.all().order_by("id")
 
@@ -51,7 +51,7 @@ def finding_list(request):
     return render(request, "findings/finding_list.html", context)
 
 
-@login_required(login_url="/admin/login/")
+@login_required
 @permission_required("findings.add_finding", raise_exception=True)
 def finding_create(request):
     if request.method == "POST":
@@ -70,7 +70,7 @@ def finding_create(request):
     )
 
 
-@login_required(login_url="/admin/login/")
+@login_required
 def finding_edit(request, pk):
     finding = get_object_or_404(Finding, pk=pk)
 
