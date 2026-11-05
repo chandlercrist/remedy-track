@@ -5,6 +5,10 @@ from django.shortcuts import redirect, render
 from .forms import FindingForm
 from .models import Finding
 
+from django.core.exceptions import PermissionDenied
+from django.shortcuts import get_object_or_404, redirect, render
+from .forms import FindingForm, FindingStatusForm
+
 
 
 @login_required(login_url="/admin/login/")
@@ -63,5 +67,36 @@ def finding_create(request):
         request,
         "findings/finding_form.html",
         {"form": form}
+    )
+
+
+@login_required(login_url="/admin/login/")
+def finding_edit(request, pk):
+    finding = get_object_or_404(Finding, pk=pk)
+
+    can_edit_all = request.user.has_perm("findings.change_finding")
+    is_assigned = finding.assigned_to_id == request.user.pk
+
+    if not can_edit_all and not is_assigned:
+        raise PermissionDenied
+
+    if can_edit_all:
+        form_class = FindingForm
+    else:
+        form_class = FindingStatusForm
+
+    if request.method == "POST":
+        form = form_class(request.POST, instance=finding)
+
+        if form.is_valid():
+            form.save()
+            return redirect("finding_list")
+    else:
+        form = form_class(instance=finding)
+
+    return render(
+        request,
+        "findings/finding_form.html",
+        {"form": form, "editing": True}
     )
 

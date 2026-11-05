@@ -114,7 +114,17 @@
 
             {% for finding in findings %}
             <tr>
-                <td>{{ finding.title }}</td>
+                
+<td>
+    {% if perms.findings.change_finding or finding.assigned_to_id == user.id %}
+        <a href="{% url 'finding_edit' finding.pk %}">
+            {{ finding.title }}
+        </a>
+    {% else %}
+        {{ finding.title }}
+    {% endif %}
+</td>
+
                 <td>{{ finding.severity }}</td>
                 <td>{{ finding.status }}</td>
                 <td>{{ finding.assigned_to|default:"Unassigned" }}</td>

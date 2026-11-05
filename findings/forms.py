@@ -14,3 +14,9 @@ class FindingForm(forms.ModelForm):
             "assigned_to",
         ]
 
+
+class FindingStatusForm(forms.ModelForm):
+    class Meta:
+        model = Finding
+        fields = ["status"]
+

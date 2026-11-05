@@ -71,7 +71,15 @@
             </nav>
         </div>
 
-        <h2>New Finding</h2>
+        
+<h2>
+    {% if editing %}
+        Edit Finding
+    {% else %}
+        New Finding
+    {% endif %}
+</h2>
+
 
         <form method="post">
             {% csrf_token %}
