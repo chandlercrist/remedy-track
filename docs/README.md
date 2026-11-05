@@ -111,3 +111,20 @@ Mitigation Criteria:
 
 ### Finding Details
 ![Finding Details Mockup](Finding-details.png)
+
+
+
+## Architecture Diagrams
+
+### System Context
+![System Context Diagram](C4-context.png)
+
+### Container
+![Container Diagram](C4-container.png)
+
+### Component
+![Component Diagram](C4-component.png)
+
+AI assistance was PARTIALLY used purely during the creation of the architecture diagrams.
+
+
