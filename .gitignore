@@ -218,3 +218,9 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Local Django secret key
+.secret_key
+
+# Local Django database
+db.sqlite3
