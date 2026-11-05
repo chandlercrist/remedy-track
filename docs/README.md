@@ -95,3 +95,19 @@ Mitigation Criteria:
 - Forms that modify application data use Django's CSRF protection.
 - Requests with missing or invalid CSRF tokens are rejected.
 - Rejected requests do not modify any finding information.
+
+
+
+## Application Mockups
+
+### Sign In
+![Sign In Mockup](Sign-in.png)
+
+### Dashboard
+![Dashboard Mockup](Dashboard.png)
+
+### Findings List
+![Findings List Mockup](Finding-list.png)
+
+### Finding Details
+![Finding Details Mockup](Finding-details.png)
