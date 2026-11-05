@@ -56,3 +56,42 @@ Acceptance Criteria:
 - The dashboard displays the number of Open, In Progress, and Resolved findings.
 - The displayed counts reflect the findings stored in the application.
 - Users can navigate from the dashboard to the findings list.
+
+
+
+## Mis-user Stories
+
+### Mis-user Story 1 - Unauthorized Access
+
+As an **unauthenticated user**, I want to **access cybersecurity findings without logging in** so I can **view information that I am not authorized to see**.
+
+Mitigation Criteria:
+- Users must authenticate before accessing the dashboard or findings.
+- Unauthenticated users attempting to access protected pages are redirected to the login page.
+- Finding information is not displayed to unauthenticated users.
+
+### Mis-user Story 2 - Unauthorized Modification
+
+As a malicious **IT staff member**, I want to **modify findings assigned to other employees** so I can **change remediation information without permission**.
+
+Mitigation Criteria:
+- IT staff can only update findings assigned to them.
+- Administrative users can update findings regardless of assignment.
+- Unauthorized modification attempts are rejected, including requests made directly through a URL.
+
+### Mis-user Story 3 - Malicious Input
+
+As a **malicious user**, I want to **insert executable scripts into finding descriptions** so I can **run unauthorized code in another user's browser**.
+
+Mitigation Criteria:
+- Finding descriptions are displayed as text rather than executable HTML or JavaScript.
+- Entering a script into a finding description does not cause it to execute when another user views the finding.
+
+### Mis-user Story 4 - Forged Requests
+
+As an **external attacker**, I want to **trick an authenticated user into submitting an unauthorized request** so I can **change finding information without their knowledge**.
+
+Mitigation Criteria:
+- Forms that modify application data use Django's CSRF protection.
+- Requests with missing or invalid CSRF tokens are rejected.
+- Rejected requests do not modify any finding information.
