@@ -1,7 +1,10 @@
 
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+
+from django.contrib.auth.decorators import login_required, permission_required
+from django.shortcuts import redirect, render
+from .forms import FindingForm
 from .models import Finding
+
 
 
 @login_required(login_url="/admin/login/")
@@ -42,4 +45,23 @@ def finding_list(request):
     }
 
     return render(request, "findings/finding_list.html", context)
+
+
+@login_required(login_url="/admin/login/")
+@permission_required("findings.add_finding", raise_exception=True)
+def finding_create(request):
+    if request.method == "POST":
+        form = FindingForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return redirect("finding_list")
+    else:
+        form = FindingForm()
+
+    return render(
+        request,
+        "findings/finding_form.html",
+        {"form": form}
+    )
 

@@ -68,6 +68,15 @@
 
         <h2>Findings</h2>
 
+
+{% if perms.findings.add_finding %}
+<p>
+    <a href="{% url 'finding_create' %}">+ New Finding</a>
+</p>
+{% endif %}
+
+
+
         <form method="get">
             <label for="severity">Severity:</label>
             <select name="severity" id="severity">
