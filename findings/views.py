@@ -15,3 +15,31 @@ def dashboard(request):
 
     return render(request, "findings/dashboard.html", context)
 
+
+@login_required(login_url="/admin/login/")
+def finding_list(request):
+    findings = Finding.objects.all().order_by("id")
+
+    severity = request.GET.get("severity", "")
+    status = request.GET.get("status", "")
+
+    if severity in dict(Finding.SEVERITY_CHOICES):
+        findings = findings.filter(severity=severity)
+    else:
+        severity = ""
+
+    if status in dict(Finding.STATUS_CHOICES):
+        findings = findings.filter(status=status)
+    else:
+        status = ""
+
+    context = {
+        "findings": findings,
+        "severity_choices": Finding.SEVERITY_CHOICES,
+        "status_choices": Finding.STATUS_CHOICES,
+        "selected_severity": severity,
+        "selected_status": status,
+    }
+
+    return render(request, "findings/finding_list.html", context)
+
