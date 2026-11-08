@@ -12,7 +12,7 @@ The goal is to provide IT staff and security personnel with a simple way to stay
 
 ### Prerequisites
 
-- Python 3.12 or newer
+- Python 3.11 or newer
 - Git
 - pip
 
@@ -43,13 +43,19 @@ source .venv/bin/activate
 python -m pip install -r requirements.txt
 ```
 
-5. Set up the database:
+5. Generate a local secret key:
+
+```bash
+python -c "from pathlib import Path; from django.core.management.utils import get_random_secret_key; Path('.secret_key').write_text(get_random_secret_key())"
+```
+
+6. Set up the database:
 
 ```bash
 python manage.py migrate
 ```
 
-6. Create an administrator account:
+7. Create an administrator account:
 
 ```bash
 python manage.py createsuperuser
