@@ -125,6 +125,6 @@ Mitigation Criteria:
 ### Component
 ![Component Diagram](C4-component.png)
 
-AI assistance was PARTIALLY used purely during the creation of the architecture diagrams.
+AI assistance was PARTIALLY used purely during the creation of the architecture diagrams and in aspects of general code development.
 
 
